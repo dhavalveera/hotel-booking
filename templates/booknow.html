@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <title>Welcome to Hotel Name</title>
+
+    <link rel="icon" href="">
+
+    <meta property="og:url"           content="http://127.0.0.1:5000" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="Hotel Name" />
+		<meta property="og:description"   content="2 to 4 sentences" />
+		<meta property="og:image"         content="" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Hotel Name">
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+
+    <meta name="description" content="Hotel Name">
+
+        <!-- Custom CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booknow.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booknow-home.css') }}">
+
+        <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+        <!-- Bootstrap CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <!-- Owl Carousel CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+
+        <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+
+  		  <!-- Animate.css -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+  		  <!-- Videojs -->
+  	<link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" />
+  	<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet"/>
+  	<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+        <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+
+
+    <header>
+
+      <ul id="dropdown1" class="dropdown-content">
+        <li>
+          <a href="{{ url_for('myaccount') }}">My Profile</a>
+        </li>
+        <li>
+          <a href="{{ url_for('user_booking') }}">My Bookings</a>
+        </li>
+      </ul>
+
+      <nav>
+        <div class="nav-wrapper">
+          <ul class="right">
+            {% if user_id %}
+              <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/user.svg') }}">&nbsp;&nbsp;&nbsp;Hey {{ user_name }} &nbsp;&nbsp;&nbsp;<img src="{{ url_for('static', filename='images/chevron-down.svg') }}"></a></li>
+              <li><a href="{{ url_for('logout') }}"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/exit.svg') }}">&nbsp;&nbsp;&nbsp;Logout</a></li>
+            {% else %}
+              <li><a href="{{ url_for('login') }}"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/user.svg') }}">&nbsp;&nbsp;&nbsp;Login / Signup</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+
+      <nav>
+        <div class="nav-wrapper">
+          <a href="{{ url_for('index') }}" class="brand-logo">Hotel Name</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/menu.svg') }}"></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+            <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+        <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      </ul>
+
+    </header>
+
+        <br><br>
+
+
+
+        <br><br><br>
+
+
+    <section class="container container-fluid" id="specroom">
+      <div class="clearfix row text-center">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="specroomone">
+              <br><br>
+          <h2> Room Detals </h2>
+            <hr style="border: 1px solid gold; width: 18%;">
+
+                <br><br>
+
+            <div class="row">
+              <div class="col s6 m6 l6 xl6">
+                <h6>
+                  Check-In Date: <br>
+                    <h5>
+                      <strong> {{ checkin }} </strong>
+                    </h5>
+                </h6>
+              </div>
+              <div class="col s6 m6 l6 xl6">
+                <h6>
+                  Check-Out Date: <br>
+                    <h5>
+                      <strong> {{ checkout }} </strong>
+                    </h5>
+                </h6>
+              </div>
+            </div>
+
+
+                  <br><br><br>
+
+
+
+
+
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="specroomone">
+                <br><br>
+          <h2> Summary Charges </h2>
+            <hr style="border: 1px solid gold; width: 25%;">
+
+            <br>
+
+          <h4> Basic Price: &nbsp;&nbsp;     &#8377; {{ specific_room_detail.price }} </h4>
+              <br>
+          <h4> <abbr title="12% GST">Taxes and Fees</abbr>: &nbsp;&nbsp;     &#8377;  {{ tax_amount }} </h4>
+              <br>
+            <h4> Total ( {{ days }} Nights ) : &nbsp;&nbsp;     &#8377; {{ total }} </h4>
+              <span>Inclusive of all Taxes.</span>
+
+                <br><br>
+
+        </div>
+      </div>
+    </section>
+
+      <br><br><br>
+
+
+
+    <article class="container container-fluid" id="bookingform">
+      <form class="" action="" method="post">
+
+          {{ bf.hidden_tag() }}
+
+        <div class="clearfix row text-center" id="bookingformone">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto">
+
+            <div class="form-group">
+
+              {{ bf.prefix.label(class='col-form-label') }}
+
+                {% if bf.prefix.errors %}
+                  {{ bf.prefix(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.prefix.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.prefix(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto">
+
+            <div class="form-group">
+
+              {{ bf.fname.label(class='col-form-label') }}
+
+                {% if bf.fname.errors %}
+                  {{ bf.fname(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.fname.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.fname(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto">
+
+            <div class="form-group">
+
+              {{ bf.lname.label(class='col-form-label') }}
+
+                {% if bf.lname.errors %}
+                  {{ bf.lname(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.lname.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.lname(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+        </div>
+        <div class="clearfix row text-center" id="bookingformone">
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto">
+
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto">
+
+            <div class="form-group">
+
+              {{ bf.dob.label(class='col-form-label') }}
+
+                {% if bf.dob.errors %}
+                  {{ bf.dob(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.dob.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.dob(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto">
+
+          </div>
+        </div>
+        <div class="clearfix row text-center" id="bookingformone">
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto">
+
+            <div class="form-group">
+
+              {{ bf.isdcode.label(class='col-form-label') }}
+
+                {% if bf.isdcode.errors %}
+                  {{ bf.isdcode(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.isdcode.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.isdcode(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto">
+
+            <div class="form-group">
+
+              {{ bf.contactno.label(class='col-form-label') }}
+
+                {% if bf.contactno.errors %}
+                  {{ bf.contactno(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.contactno.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.contactno(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+        </div>
+        <div class="clearfix row text-center" id="bookingformone">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 my-auto"">
+
+            <div class="form-group">
+
+              {{ bf.sp_req.label(class='col-form-label') }}
+
+                {% if bf.sp_req.errors %}
+                  {{ bf.sp_req(class='form-control is-invalid') }}
+                  <div class="invalid-feedback">
+                    {% for error in bf.sp_req.errors %}
+                      <span>
+                        {{ error }}
+                      </span>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  {{ bf.sp_req(class='form-control') }}
+                {% endif %}
+
+            </div>
+
+          </div>
+        </div>
+        <div class="clearfix row text-center" id="bookingformone">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 my-auto">
+
+            <div class="form-group">
+              {{ bf.submit(class='form-control btn btn-outline-primary') }}
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </article>
+
+
+
+
+
+
+
+          <br><br><br>
+
+
+  <footer class="container container-fluid jumbotron" id="footer">
+    <div class="clearfix row text-center">
+      <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+        <h4> Hotel Name </h4>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+        <h5> &copy; &nbsp;&nbsp;&nbsp; 2020. All Rights Reserved. </h5>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+        <ul>
+          <li><a href="https://www.linkedin.com" target="_blank"><img src="{{ url_for('static', filename='images/linkedin.png') }}"></a></li>
+  				<li><a href="https://www.instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/instagram.png') }}"></a></li>
+  				<li><a href="https://www.facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/facebook.png') }}"></a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+        <!-- Bootstrap JS File -->
+	  <script src="{{ url_for('static', filename='js/jquery-slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+
+    	  <!-- VideoJS -->
+    <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
+
+    	  <!-- Owl Carousel JS File -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+
+
+        <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/materializecss/mixup.js') }}"></script>
+
+
+        <!-- SweetAlert JS File -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+        <!-- Stripe.js File -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+
+  </body>
+</html>

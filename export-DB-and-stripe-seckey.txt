@@ -1,0 +1,6 @@
+export SEC_KEY=sk_test_51GzvB8DwnPidhgBiuJ0PvQ710uv9sc7ySNONbeipUU3POFuSk4lQMXhPybdRZ3hxBdSdjfJO6hRBD0Yt5NZWwcj500Ts5t3sH5
+
+
+
+
+export DATABASE_URL=postgres://surouifayxxjow:64528fbfd96e2508454b92985cf95f4f04ce8794a406522ffa6ab5fb586510f4@ec2-18-210-214-86.compute-1.amazonaws.com:5432/ddcfd7pbpvcjl

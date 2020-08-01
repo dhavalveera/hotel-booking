@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <title>Welcome to Hotel Name</title>
+
+    <link rel="icon" href="">
+
+    <meta property="og:url"           content="http://127.0.0.1:5000" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="Hotel Name" />
+		<meta property="og:description"   content="2 to 4 sentences" />
+		<meta property="og:image"         content="" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Hotel Name">
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+
+    <meta name="description" content="Hotel Name">
+
+        <!-- Custom CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login-home.css') }}">
+
+        <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+        <!-- Bootstrap CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <!-- Owl Carousel CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+
+        <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+
+  		  <!-- Animate.css -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+  		  <!-- Videojs -->
+  	<link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" />
+  	<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet"/>
+  	<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+        <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+
+
+    <header>
+
+      <nav>
+        <div class="nav-wrapper">
+          <a href="{{ url_for('index') }}" class="brand-logo">Hotel Name</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/menu.svg') }}"></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+            <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+        <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      </ul>
+
+    </header>
+
+<br><br>
+
+<section class="container container-fluid">
+  <div class="clearfix row text-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} text-center">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+    </div>
+  </div>
+</section>
+
+  <br><br>
+
+<article class="container container-fluid">
+  <div class="clearfix row text-center" id="form">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="login">
+
+      <h2> Login </h2>
+        <hr style="border: 1px solid red; width: 8%">
+        <br>
+
+      <form class="" action="" method="post">
+
+        {{ form_two.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form_two.username_two.label(class='col-form-label') }}
+          {{ form_two.username_two(class='form-control') }}
+        </div>
+        <div class="form-group">
+          {{ form_two.password.label(class='col-form-label') }}
+          {{ form_two.password(class='form-control') }}
+        </div>
+        <div class="form-group">
+          {{ form_two.submit(class='form-control btn btn-primary') }}
+        </div>
+
+      </form>
+
+        <br><br>
+
+    </div>
+      <br><br>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="signup">
+
+      <h2> Create New Account </h2>
+        <hr style="border: 1px solid red; width: 25%;">
+        <br>
+
+      <form class="" action="" method="post">
+
+        {{ form_one.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form_one.fname.label(class='col-form-label') }}
+
+          {% if form_one.fname.errors %}
+            {{ form_one.fname(class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form_one.fname.errors %}
+                <span>
+                  {{ error }}
+                </span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form_one.fname(class='form-control') }}
+          {% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ form_one.lname.label(class='col-form-label') }}
+
+          {% if form_one.lname.errors %}
+            {{ form_one.lname(class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form_one.lname.errors %}
+                <span>
+                  {{ error }}
+                </span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form_one.lname(class='form-control') }}
+          {% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ form_one.username_one.label(class='col-form-label') }}
+
+          {% if form_one.username_one.errors %}
+            {{ form_one.username_one(class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form_one.username_one.errors %}
+                <span>
+                  {{ error }}
+                </span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form_one.username_one(class='form-control') }}
+          {% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ form_one.email_one.label(class='col-form-label') }}
+
+          {% if form_one.email_one.errors %}
+            {{ form_one.email_one(class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form_one.email_one.errors %}
+                <span>
+                  {{ error }}
+                </span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form_one.email_one(class='form-control') }}
+          {% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ form_one.password.label(class='col-form-label') }}
+
+          {% if form_one.password.errors %}
+            {{ form_one.password(class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form_one.password.errors %}
+                <span>
+                  {{ error }}
+                </span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form_one.password(class='form-control') }}
+          {% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ form_one.contactno.label(class='col-form-label') }}
+
+          {% if form_one.contactno.errors %}
+            {{ form_one.contactno(class='form-control is-invalid') }}
+            <div class="invalid-feedback">
+              {% for error in form_one.contactno.errors %}
+                <span>
+                  {{ error }}
+                </span>
+              {% endfor %}
+            </div>
+          {% else %}
+            {{ form_one.contactno(class='form-control') }}
+          {% endif %}
+
+        </div>
+        <div class="form-group">
+          {{ form_one.submit(class='form-control btn btn-primary') }}
+        </div>
+
+      </form>
+
+        <br><br>
+
+    </div>
+  </div>
+</article>
+
+  <br><br>
+
+
+<aside class="container container-fluid">
+  <div class="clearfix row">
+    <div class="col s12 m12 l12 xl12 center">
+
+      <p> Forgot Password?
+        <a href="{{ url_for('forgot_password') }}">Click Here</a>
+      </p>
+
+    </div>
+  </div>
+</aside>
+
+
+
+<br><br><br><br>
+
+<footer class="container container-fluid jumbotron" id="footer">
+  <div class="clearfix row text-center">
+    <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+      <h4> Hotel Name </h4>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+      <h5> &copy; &nbsp;&nbsp;&nbsp; 2020. All Rights Reserved. </h5>
+    </div>
+    <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+      <ul>
+        <li><a href="https://www.linkedin.com" target="_blank"><img src="{{ url_for('static', filename='images/linkedin.png') }}"></a></li>
+        <li><a href="https://www.instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/instagram.png') }}"></a></li>
+        <li><a href="https://www.facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/facebook.png') }}"></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+      <!-- Bootstrap JS File -->
+  <script src="{{ url_for('static', filename='js/jquery-slim.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+
+      <!-- VideoJS -->
+  <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
+
+      <!-- Owl Carousel JS File -->
+  <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+
+
+      <!-- Materialize JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="{{ url_for('static', filename='js/materializecss/mixup.js') }}"></script>
+
+
+
+            <!-- SweetAlert JS File -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+      <!-- Stripe.js File -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+
+
+  </body>
+</html>

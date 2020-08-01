@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <title>About Us :: Hotel Name</title>
+
+    <link rel="icon" href="">
+
+    <meta property="og:url"           content="http://127.0.0.1:5000" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="Hotel Name" />
+		<meta property="og:description"   content="2 to 4 sentences" />
+		<meta property="og:image"         content="" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Hotel Name">
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+
+    <meta name="description" content="Hotel Name">
+
+        <!-- Custom CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about-home.css') }}">
+
+        <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+        <!-- Bootstrap CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <!-- Owl Carousel CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+
+        <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+
+  		  <!-- Animate.css -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+  		  <!-- Videojs -->
+  	<link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" />
+  	<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet"/>
+  	<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+        <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+
+
+    <header>
+
+      <ul id="dropdown1" class="dropdown-content">
+        <li>
+          <a href="{{ url_for('myaccount') }}">My Profile</a>
+        </li>
+        <li>
+          <a href="{{ url_for('user_booking') }}">My Bookings</a>
+        </li>
+      </ul>
+
+      <nav>
+        <div class="nav-wrapper">
+          <ul class="right">
+            {% if user_id %}
+              <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/user.svg') }}">&nbsp;&nbsp;&nbsp;Hey {{ user_name }} &nbsp;&nbsp;&nbsp;<img src="{{ url_for('static', filename='images/chevron-down.svg') }}"></a></li>
+              <li><a href="{{ url_for('logout') }}"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/exit.svg') }}">&nbsp;&nbsp;&nbsp;Logout</a></li>
+            {% else %}
+              <li><a href="{{ url_for('login') }}"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/user.svg') }}">&nbsp;&nbsp;&nbsp;Login / Signup</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+
+      <nav>
+        <div class="nav-wrapper">
+          <a href="{{ url_for('index') }}" class="brand-logo">Hotel Name</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/menu.svg') }}"></a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li class="active"><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+            <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        <li><a href="{{ url_for('index') }}">Home</a></li>
+        <li class="active"><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+        <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      </ul>
+
+    </header>
+
+<br><br>
+
+<section class="container container-fluid" id="breadcrumb">
+  <div class="clearfix row text-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 my-auto">
+      <h1> About Us </h1>
+    </div>
+  </div>
+  <div class="clearfix row text-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 my-auto">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">About</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+</section>
+
+  <br><br>
+
+<article class="container container-fluid">
+  <div class="clearfix row text-center">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="fewword">
+      <img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/hotel-reception.jpg') }}" alt="Hotel Reception">
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto text-left" id="fewword">
+      <h3> A Few Words About Us </h3>
+        <hr style="border: 1px solid brown; width: 5%; float: left">
+        <br><br>
+      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+    </div>
+  </div>
+</article>
+
+
+    <br><br><br>
+
+
+  <aside class="container container-fluid jumbotron">
+    <div class="clearfix row text-center">
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="belowheader">
+        <p><span><img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/thumbs-up.svg') }}" alt="">&nbsp;&nbsp;&nbsp; Stylish Accomodation</span></p>
+
+          <br><br>
+
+        <p> Ei sumo eruditi sadipscing nec, scripta epicurei ut nec, scripta epicurei ut eam. Duo ut fastidii platonem, eu neglegentur est </p>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="belowheader">
+        <p><span><img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/user.svg') }}" alt="">&nbsp;&nbsp;&nbsp; Qualified Employees</span></p>
+
+          <br><br>
+
+        <p> Vel nihil percipitur ei. Fugit option oportere est. Fugit option oportere est in, te dignissim philosophia mea, duo ea. In eum porro </p>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="belowheader">
+        <p><span><img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/user.svg') }}" alt="">&nbsp;&nbsp;&nbsp; Happy Clients</span></p>
+
+          <br><br>
+
+        <p> Te partem omnesque eligendi has, nam ex persius has, nam ex persius lobortis. His ex amet facilis, ne vix diceret. Veniam nonumes sit </p>
+      </div>
+      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="belowheader">
+        <p><span><img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/credit-card.png') }}" alt="">&nbsp;&nbsp;&nbsp; Various Payment Methods</span></p>
+
+          <br><br>
+
+        <p> We accept various Payment Methods such as Credit / Debit Card, PayPal, Stripe, Offline (Cash) Payment. </p>
+      </div>
+    </div>
+  </aside>
+
+  <br><br>
+
+
+<article class="container container-fluid">
+  <div class="clearfix row">
+    <div class="col s12 m12 l12 xl12 center">
+      <h2> Our Team </h2>
+        <hr style="border: 1px solid brown; width: 5%;">
+    </div>
+  </div>
+  <div class="clearfix row text-center">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+      <h4> Team Members List here </h4>
+    </div>
+  </div>
+</article>
+
+    <br><br><br>
+
+  <aside class="container container-fluid jumbotron" id="call">
+    <div class="clearfix row">
+      <div class="col s12 m12 l12 xl12 center">
+        <h3> <b> We have the best atmosphere! </b> Do you need a room? <br> <a href="tel:123456789">Call Now!</a> </h3>
+      </div>
+    </div>
+  </aside>
+
+
+<footer class="container container-fluid jumbotron" id="footer">
+<div class="clearfix row text-center">
+  <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+    <h4> Hotel Name </h4>
+  </div>
+  <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+    <h5> &copy; &nbsp;&nbsp;&nbsp; 2020. All Rights Reserved. </h5>
+  </div>
+  <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+    <ul>
+      <li><a href="https://www.linkedin.com" target="_blank"><img src="{{ url_for('static', filename='images/linkedin.png') }}"></a></li>
+      <li><a href="https://www.instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/instagram.png') }}"></a></li>
+      <li><a href="https://www.facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/facebook.png') }}"></a></li>
+    </ul>
+  </div>
+</div>
+</footer>
+
+
+    <!-- Bootstrap JS File -->
+<script src="{{ url_for('static', filename='js/jquery-slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+
+    <!-- VideoJS -->
+<script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
+
+    <!-- Owl Carousel JS File -->
+<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+
+
+    <!-- Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="{{ url_for('static', filename='js/materializecss/mixup.js') }}"></script>
+
+
+    <!-- SweetAlert JS File -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+    <!-- Stripe.js File -->
+<script src="https://js.stripe.com/v3/"></script>
+
+
+
+</body>
+</html>

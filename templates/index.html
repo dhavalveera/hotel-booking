@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <title>Welcome to Hotel Name</title>
+
+    <link rel="icon" href="">
+
+    <meta property="og:url"           content="http://127.0.0.1:5000" />
+		<meta property="og:type"          content="website" />
+		<meta property="og:title"         content="Hotel Name" />
+		<meta property="og:description"   content="2 to 4 sentences" />
+		<meta property="og:image"         content="" />
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Hotel Name">
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+
+    <meta name="description" content="Hotel Name">
+
+        <!-- Custom CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index-home.css') }}">
+
+        <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+        <!-- Bootstrap CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+        <!-- Owl Carousel CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.css') }}">
+  	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+
+
+        <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Philosopher&display=swap" rel="stylesheet">
+
+  		  <!-- Animate.css -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+
+  		  <!-- Videojs -->
+  	<link href="https://vjs.zencdn.net/7.8.2/video-js.css" rel="stylesheet" />
+  	<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet"/>
+  	<script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+
+        <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+
+
+    <header>
+
+      <ul id="dropdown1" class="dropdown-content">
+        <li>
+          <a href="{{ url_for('myaccount') }}">My Profile</a>
+        </li>
+        <li>
+          <a href="{{ url_for('user_booking') }}">My Bookings</a>
+        </li>
+      </ul>
+
+      <nav>
+        <div class="nav-wrapper">
+          <ul class="right">
+            {% if user_id %}
+              <li><a class="dropdown-trigger" href="#!" data-target="dropdown1"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/user.svg') }}">&nbsp;&nbsp;&nbsp;Hey {{ user_name }} &nbsp;&nbsp;&nbsp;<img src="{{ url_for('static', filename='images/chevron-down.svg') }}"></a></li>
+              <li><a href="{{ url_for('logout') }}"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/exit.svg') }}">&nbsp;&nbsp;&nbsp;Logout</a></li>
+            {% else %}
+              <li><a href="{{ url_for('login') }}"><img class="img-fluid img-responsive" src="{{ url_for('static', filename='images/user.svg') }}">&nbsp;&nbsp;&nbsp;Login / Signup</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+
+      <nav>
+        <div class="nav-wrapper">
+          <a href="{{ url_for('index') }}" class="brand-logo">Hotel Name</a>
+          <a href="#" data-target="mobile-demo" class="sidenav-trigger"><img src="{{ url_for('static', filename='images/menu.svg') }}"></a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+            <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <ul class="sidenav" id="mobile-demo">
+        <li class="active"><a href="{{ url_for('index') }}">Home</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
+        <li><a href="{{ url_for('room') }}">Rooms & Suites</a></li>
+        <li><a href="{{ url_for('gallery') }}">Gallery</a></li>
+        <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      </ul>
+
+    </header>
+
+<br><br>
+
+
+  <section class="container container-fluid jumbotron">
+    <div class="clearfix row text-center">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <h2 class="animate__animated animate__flip"> Enjoy Luxury Experience </h2>
+
+          <br><br>
+      </div>
+    </div>
+    <form class="" action="" method="POST">
+
+      {{ sroom.hidden_tag() }}
+
+      <div class="clearfix row text-center">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto">
+          <div class="form-group">
+
+            <h5>
+              {{ sroom.checkin.label(class='col-form-label animate__animated animate__fadeInLeft') }}
+            </h5>
+
+            {% if sroom.checkin.errors %}
+              {{ sroom.checkin(class='form-control is-invalid') }}
+              <div class="invalid-feedback">
+                {% for error in sroom.checkin.errors %}
+                  <span>
+                    {{ error }}
+                  </span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ sroom.checkin(class='form-control') }}
+            {% endif %}
+
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto">
+          <div class="form-group">
+
+            <h5>
+              {{ sroom.checkout.label(class='col-form-label animate__animated animate__fadeInDown') }}
+            </h5>
+
+            {% if sroom.checkout.errors %}
+              {{ sroom.checkout(class='form-control is-invalid') }}
+              <div class="invalid-feedback">
+                {% for error in sroom.checkout.errors %}
+                  <span>
+                    {{ error }}
+                  </span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ sroom.checkout(class='form-control') }}
+            {% endif %}
+
+          </div>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto">
+          <div class="form-group">
+
+            <h5>
+              {{ sroom.no_of_guests.label(class='col-form-label animate__animated animate__fadeInRight') }}
+            </h5>
+
+            {% if sroom.no_of_guests.errors %}
+              {{ sroom.no_of_guests(class='form-control is-invalid') }}
+              <div class="invalid-feedback">
+                {% for error in sroom.no_of_guests.errors %}
+                  <span>
+                    {{ error }}
+                  </span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ sroom.no_of_guests(class='form-control') }}
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+      <div class="clearfix row text-center">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          {{ sroom.submit(class='form-control btn btn-primary animate__animated animate__fadeInUp') }}
+        </div>
+      </div>
+
+    </form>
+  </section>
+
+<br><br>
+
+<article class="container container-fluid" id="rooms">
+  <div class="clearfix row center">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="roomone">
+      <h3> Our Best Rooms </h3>
+    </div>
+      <br><br>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 my-auto" id="roomone">
+      <p><a href="{{ url_for('room') }}"><button class="btn btn-primary">View All Rooms</button></a></p>
+    </div>
+  </div>
+  <div class="clearfix row center">
+    <div class="col-xs-6 col-sm-6 col-lg-6 col-xl-6 my-auto" id="roomtype">
+      <figure>
+        <img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/small-room.jpg') }}" alt="Small Room">
+          <br><br>
+        <figcaption>
+          <h5 class="left"> Small Room </h5>
+          <h5 class="right"> from &#x20B9; 1000 </h5>
+        </figcaption>
+      </figure>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-lg-6 col-xl-6 my-auto" id="roomtype">
+      <figure>
+        <img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/medium-room.jpg') }}" alt="Medium Room">
+          <br><br>
+        <figcaption>
+          <h5 class="left"> Medium Room </h5>
+          <h5 class="right"> from &#x20B9; 1200 </h5>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</article>
+
+
+  <br><br><br>
+
+
+<section class="container container-fluid jumbotron">
+  <div class="clearfix row text-center">
+    <div class="col s12 m12 l12 l12">
+      <h2> Our Services </h2>
+    </div>
+  </div>
+  <div class="clearfix row text-center">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/wifi.png') }}" alt="Wifi at Hotel Name">
+            <br><br>
+          <h4> Free Wifi </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> Our free Wi-Fi internet service is available 24-hours in lobby, meeting room, facilities and guest rooms to hel you stay connected wherever you are. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/air-conditioner.png') }}" alt="Air Condition at Hotel Name">
+            <br><br>
+          <h4> Air Condition Rooms </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> Our all rooms are fitted with Air Conditions which are available 24 hours in lobby, meeting room, and guest rooms to hel you stay cool whenever you are. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/no-smoking.png') }}" alt="No Smoking at Hotel Name">
+            <br><br>
+          <h4> Smoking Prohibition </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> At our Hotel Rooms, Lobby, Meeting Room and Guest Rooms, Smoking is totally prohibited. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/screen.svg') }}" alt="Television at Hotel Name">
+            <br><br>
+          <h4> Television </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> Our all the Rooms, and Guest Room are fitted with HD Television & in Meeting Room is fitted with Projector. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+    <br><br>
+  <div class="clearfix row text-center">
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/dinner.svg') }}" alt="Restaurant at Hotel Name">
+            <br><br>
+          <h4> Restaurant </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> The restaurants of our hotel will gratify the taste of the most exacting guests. Here, you can taste some culinary masterpieces by our chef. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/car.svg') }}" alt="Car Rentals at Hotel Name">
+            <br><br>
+          <h4> Car Rentals </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> We work with the best car rental companies in India, bringing you discount car rental rates and a wide variety of car rental classes. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/card-parking.png') }}" alt="Parking Facility at Hotel Name">
+            <br><br>
+          <h4> Parking Facility </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> At our Hotel we have enough Parking Space for our Guests. </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3 my-auto" id="ourservices">
+      <div class="card">
+        <div class="card-body">
+          <img src="{{ url_for('static', filename='images/power-backup.png') }}" alt="Power Backup at Hotel Name">
+            <br><br>
+          <h4> Power Backup </h4>
+            <br>
+          <div class="divider"></div>
+            <br>
+          <p> Our Hotel have Power Backup so whenever electricity is broken, we can run on Power Backup. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <br><br>
+
+
+  <article class="container container-fluid" id="testimonials">
+    <div class="clearfix row text-center">
+      <div class="col s12 m12 l12 xl12 center my-auto">
+        <h2> Testimonials </h2>
+      </div>
+    </div>
+    <div class="clearfix row text-center">
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto" id="testilist">
+        <div class="card">
+          <img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/img_avatar1.jpg') }}" alt="">
+
+          <div class="card-body">
+            <h3 class="card-title"> Guest Name </h3>
+              <br>
+            <h6 class="card-text"> Guest Testimonials goes here. </h6>
+              <br>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto" id="testilist">
+        <div class="card">
+          <img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/img_avatar1.jpg') }}" alt="">
+
+          <div class="card-body">
+            <h3 class="card-title"> Guest Name </h3>
+              <br>
+            <h6 class="card-text"> Guest Testimonials goes here. </h6>
+              <br>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4 my-auto" id="testilist">
+        <div class="card">
+          <img class="responsive-img img-fluid" src="{{ url_for('static', filename='images/img_avatar1.jpg') }}" alt="">
+
+          <div class="card-body">
+            <h3 class="card-title"> Guest Name </h3>
+              <br>
+            <h6 class="card-text"> Guest Testimonials goes here. </h6>
+              <br>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+      <br><br><br>
+    <div class="clearfix row text-center">
+      <div class="col s12 m12 l12 xl12 my-auto" id="testimonialsbtn">
+        <a href="#"><button class="btn btn-secondary" type="button" name="button"> View More </button></a>
+      </div>
+    </div>
+  </article>
+
+    <br><br><br>
+
+
+  <footer class="container container-fluid jumbotron" id="footer">
+    <div class="clearfix row text-center">
+      <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+        <h4> Hotel Name </h4>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+        <h5> &copy; &nbsp;&nbsp;&nbsp; 2020. All Rights Reserved. </h5>
+      </div>
+      <div class="col-xs-4 col-sm-4 col-lg-4 col-xl-4 my-auto">
+        <ul>
+          <li><a href="https://www.linkedin.com" target="_blank"><img src="{{ url_for('static', filename='images/linkedin.png') }}"></a></li>
+  				<li><a href="https://www.instagram.com" target="_blank"><img src="{{ url_for('static', filename='images/instagram.png') }}"></a></li>
+  				<li><a href="https://www.facebook.com" target="_blank"><img src="{{ url_for('static', filename='images/facebook.png') }}"></a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+        <!-- Bootstrap JS File -->
+	  <script src="{{ url_for('static', filename='js/jquery-slim.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+
+
+    	  <!-- VideoJS -->
+    <script src="https://vjs.zencdn.net/7.8.2/video.js"></script>
+
+    	  <!-- Owl Carousel JS File -->
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+
+
+        <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="{{ url_for('static', filename='js/materializecss/mixup.js') }}"></script>
+
+
+        <!-- SweetAlert JS File -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+        <!-- Stripe.js File -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+
+
+  </body>
+</html>
