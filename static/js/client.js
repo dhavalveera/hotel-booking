@@ -81,10 +81,11 @@ var orderComplete = function(paymentIntentId) {
       "href",
       "https://dashboard.stripe.com/test/payments/" + paymentIntentId
     );
+
+  window.location.href = "/thanks";
+
   document.querySelector(".result-message").classList.remove("hidden");
   document.querySelector("button").disabled = true;
-
-  window.location.href = "https://google.com";
 
 
 };
