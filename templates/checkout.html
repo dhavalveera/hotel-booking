@@ -10,7 +10,7 @@
 		<meta property="og:type"          content="website" />
 		<meta property="og:title"         content="Hotel Name" />
 		<meta property="og:description"   content="Description about Hotel Name" />
-		<meta property="og:image"         content="" />
+		<meta property="og:image"         content="{{ url_for('static', filename='images/H.png') }}" />
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Hotel Name">
 
@@ -229,6 +229,14 @@
       </div>
     </div>
   </footer>
+
+
+
+
+
+        <!-- Custom JS File -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/dontopen.js') }}" defer></script>
+        <!-- End of Custom File -->
 
 
         <!-- Bootstrap JS File -->
