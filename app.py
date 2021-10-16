@@ -11,7 +11,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 
-#Setup Database
+#Creating Database
 engine = create_engine(os.getenv("DATABASE_URL"), encoding="utf-8")
 db = scoped_session(sessionmaker(bind=engine))
 
